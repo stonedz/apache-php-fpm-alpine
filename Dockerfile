@@ -7,10 +7,10 @@ EXPOSE 80/tcp
 EXPOSE 443/tcp
 
 # update repositories to edge
-RUN printf "https://dl-cdn.alpinelinux.org/alpine/edge/main\nhttps://dl-cdn.alpinelinux.org/alpine/edge/community\n" > /etc/apk/repositories
+#RUN printf "https://dl-cdn.alpinelinux.org/alpine/edge/main\nhttps://dl-cdn.alpinelinux.org/alpine/edge/community\n" > /etc/apk/repositories
 
 # add testing repository
-RUN printf "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing\n" >> /etc/apk/repositories
+#RUN printf "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing\n" >> /etc/apk/repositories
 
 # update apk repositories
 RUN apk update
@@ -18,95 +18,95 @@ RUN apk update
 # upgrade all
 RUN apk upgrade
 
-# add tini https://github.com/krallin/tini/issues/8
+# add tini https://github.com/krallin/tini/issues/8"
 RUN apk add tini
 
 # install latest certificates for ssl
-RUN apk add ca-certificates@testing
+RUN apk add ca-certificates
 
 # install console tools
 RUN apk add \
-    inotify-tools@testing
+    inotify-tools
 
 # install zsh
 RUN apk add \
-    zsh@testing \
-    zsh-vcs@testing
+    zsh \
+    zsh-vcs
 
 # configure zsh
 COPY --chown=root:root include/zshrc /etc/zsh/zshrc
 
 # install php
 RUN apk add \
-    php83@testing \
-    #    php83-apache2@testing \
-    php83-bcmath@testing \
-    #    php83-brotli@testing \
-    php83-bz2@testing \
-    php83-calendar@testing \
-    #    php83-cgi@testing \
-    php83-common@testing \
-    php83-ctype@testing \
-    php83-curl@testing \
-    #    php83-dba@testing \
-    #    php83-dbg@testing \
-    #    php83-dev@testing \
-    #    php83-doc@testing \
-    php83-dom@testing \
-    #    php83-embed@testing \
-    #    php83-enchant@testing \
-    php83-exif@testing \
-    #    php83-ffi@testing \
-    php83-fileinfo@testing \
-    php83-ftp@testing \
-    php83-gd@testing \
-    php83-gettext@testing \
-    #    php83-gmp@testing \
-    php83-json@testing \
-    php83-iconv@testing \
-    php83-imap@testing \
-    php83-intl@testing \
-    php83-ldap@testing \
-    #    php83-litespeed@testing \
-    php83-mbstring@testing \
-    php83-mysqli@testing \
-    #    php83-mysqlnd@testing \
-    #    php83-odbc@testing \
-    php83-opcache@testing \
-    php83-openssl@testing \
-    php83-pcntl@testing \
-    php83-pdo@testing \
-    php83-pdo_mysql@testing \
-    #    php83-pdo_odbc@testing \
-    #    php83-pdo_pgsql@testing \
-    php83-pdo_sqlite@testing \
-    #    php83-pear@testing \
-    #    php83-pgsql@testing \
-    php83-phar@testing \
-    #   php83-phpdbg@testing \
-    php83-posix@testing \
-    #    php83-pspell@testing \
-    php83-session@testing \
-    #    php83-shmop@testing \
-    php83-simplexml@testing \
-    #    php83-snmp@testing \
-    php83-soap@testing \
-    #    php83-sockets@testing \
-    php83-sodium@testing \
-    php83-sqlite3@testing \
-    #    php83-sysvmsg@testing \
-    #    php83-sysvsem@testing \
-    #    php83-sysvshm@testing \
-    #    php83-tideways_xhprof@testing \
-    #    php83-tidy@testing \
-    php83-tokenizer@testing \
-    php83-xml@testing \
-    php83-xmlreader@testing \
-    php83-xmlwriter@testing \
-    php83-zip@testing
+    php83 \
+    #    php83-apache2 \
+    php83-bcmath \
+    #    php83-brotli \
+    php83-bz2 \
+    php83-calendar \
+    #    php83-cgi \
+    php83-common \
+    php83-ctype \
+    php83-curl \
+    #    php83-dba \
+    #    php83-dbg \
+    #    php83-dev \
+    #    php83-doc \
+    php83-dom \
+    #    php83-embed \
+    #    php83-enchant \
+    php83-exif \
+    #    php83-ffi \
+    php83-fileinfo \
+    php83-ftp \
+    php83-gd \
+    php83-gettext \
+    #    php83-gmp \
+    php83-json \
+    php83-iconv \
+    php83-imap \
+    php83-intl \
+    php83-ldap \
+    #    php83-litespeed \
+    php83-mbstring \
+    php83-mysqli \
+    #    php83-mysqlnd \
+    #    php83-odbc \
+    php83-opcache \
+    php83-openssl \
+    php83-pcntl \
+    php83-pdo \
+    php83-pdo_mysql \
+    #    php83-pdo_odbc \
+    #    php83-pdo_pgsql \
+    php83-pdo_sqlite \
+    #    php83-pear \
+    #    php83-pgsql \
+    php83-phar \
+    #   php83-phpdbg \
+    php83-posix \
+    #    php83-pspell \
+    php83-session \
+    #    php83-shmop \
+    php83-simplexml \
+    #    php83-snmp \
+    php83-soap \
+    #    php83-sockets \
+    php83-sodium \
+    php83-sqlite3 \
+    #    php83-sysvmsg \
+    #    php83-sysvsem \
+    #    php83-sysvshm \
+    #    php83-tideways_xhprof \
+    #    php83-tidy \
+    php83-tokenizer \
+    php83-xml \
+    php83-xmlreader \
+    php83-xmlwriter \
+    php83-zip
 
 # use php83-fpm instead of php83-apache
-RUN apk add php83-fpm@testing
+RUN apk add php83-fpm
 
 # i18n
 RUN apk add \
@@ -118,52 +118,52 @@ RUN apk add \
 #ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 # create php aliases
-RUN rm /usr/bin/php
+#RUN rm /usr/bin/php
 RUN ln -s /usr/bin/php83 /usr/bin/php
 RUN ln -s /usr/sbin/php-fpm83 /usr/sbin/php-fpm
 
 # PECL extensions
 RUN apk add \
-    #    php83-pecl-amqp@testing \
-    php83-pecl-apcu@testing \
-    #    php83-pecl-ast@testing \
-    #    php83-pecl-couchbase@testing \
-    #    php83-pecl-event@testing \
-    #    php83-pecl-igbinary@testing \
-    php83-pecl-imagick@testing \
-    php83-pecl-imagick-dev@testing \
-    #    php83-pecl-lzf@testing \
-    #    php83-pecl-mailparse@testing \
-    #    php83-pecl-maxminddb@testing \
-    #    php83-pecl-mcrypt@testing \
-    #    php83-pecl-memcache@testing \
-    #    php83-pecl-memcached@testing \
-    #    php83-pecl-mongodb@testing \
-    #    php83-pecl-msgpack@testing \
-    #    php83-pecl-oauth@testing \
-    #    php83-pecl-protobuf@testing \
-    #    php83-pecl-psr@testing \
-    #    php83-pecl-rdkafka@testing \
-    #    php83-pecl-redis@testing \
-    #    php83-pecl-ssh2@testing \
-    #    php83-pecl-timezonedb@testing \
-    #    php83-pecl-uploadprogress@testing \
-    #    php83-pecl-uploadprogress-doc@testing \
-    #    php83-pecl-uuid@testing \
-    #    php83-pecl-vips@testing \
-    php83-pecl-xdebug@testing
-#    php83-pecl-xhprof@testing \
-#    php83-pecl-xhprof-assets@testing \
-#    php83-pecl-yaml@testing \
-#    php83-pecl-zstd@testing \
-#    php83-pecl-zstd-dev@testing
+    #    php83-pecl-amqp \
+    php83-pecl-apcu \
+    #    php83-pecl-ast \
+    #    php83-pecl-couchbase \
+    #    php83-pecl-event \
+    #    php83-pecl-igbinary \
+    php83-pecl-imagick \
+    php83-pecl-imagick-dev \
+    #    php83-pecl-lzf \
+    #    php83-pecl-mailparse \
+    #    php83-pecl-maxminddb \
+    #    php83-pecl-mcrypt \
+    #    php83-pecl-memcache \
+    #    php83-pecl-memcached \
+    #    php83-pecl-mongodb \
+    #    php83-pecl-msgpack \
+    #    php83-pecl-oauth \
+    #    php83-pecl-protobuf \
+    #    php83-pecl-psr \
+    #    php83-pecl-rdkafka \
+    #    php83-pecl-redis \
+    #    php83-pecl-ssh2 \
+    #    php83-pecl-timezonedb \
+    #    php83-pecl-uploadprogress \
+    #    php83-pecl-uploadprogress-doc \
+    #    php83-pecl-uuid \
+    #    php83-pecl-vips \
+    php83-pecl-xdebug
+#    php83-pecl-xhprof \
+#    php83-pecl-xhprof-assets \
+#    php83-pecl-yaml \
+#    php83-pecl-zstd \
+#    php83-pecl-zstd-dev
 
 # configure xdebug
 COPY --chown=root:root include/xdebug.ini /etc/php83/conf.d/xdebug.ini
 
 # install composer (currently installs php8.1 which creates a mess, use script approach instead to install)
 #RUN apk add \
-#    composer@testing
+#    composer
 
 # add composer script
 COPY --chown=root:root include/composer.sh /tmp/composer.sh
@@ -186,9 +186,9 @@ RUN chmod +x /usr/bin/selfsign
 
 # install apache
 RUN apk add \
-    apache2@testing \
-    apache2-ssl@testing \
-    apache2-proxy@testing
+    apache2 \
+    apache2-ssl \
+    apache2-proxy
 
 # delete apk cache
 RUN rm -rf /var/cache/apk/*
