@@ -158,6 +158,11 @@ RUN apk add \
 #    php83-pecl-zstd \
 #    php83-pecl-zstd-dev
 
+ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
+RUN apk add \
+    musl-locales \
+    musl-locales-lang
+
 # configure xdebug
 COPY --chown=root:root include/xdebug.ini /etc/php83/conf.d/xdebug.ini
 
@@ -247,7 +252,7 @@ RUN sed -i 's|^max_execution_time .*$|max_execution_time = 12000|g' /etc/php83/p
 RUN sed -i 's|^memory_limit .*$|memory_limit = 512M|g' /etc/php83/php.ini
 
 # php log everything
-RUN sed -i 's|^error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT$|error_reporting = E_ALL & ~E_DEPRECATED|g' /etc/php83/php.ini
+RUN sed -i 's|^error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT|error_reporting = E_ALL |g' /etc/php83/php.ini
 
 # add php-spx
 COPY --chown=root:root include/php-spx/assets/ /usr/share/misc/php-spx/assets/
