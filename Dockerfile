@@ -33,6 +33,9 @@ RUN apk add \
     zsh \
     zsh-vcs
 
+# install rsync for publishing
+RUN apk add rsync
+
 # configure zsh
 COPY --chown=root:root include/zshrc /etc/zsh/zshrc
 
