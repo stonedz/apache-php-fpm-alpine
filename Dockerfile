@@ -251,6 +251,12 @@ RUN sed -i "s|#ServerName .*:80|ServerName localhost:80|g" /etc/apache2/httpd.co
 # update php max execution time for easier debugging
 RUN sed -i 's|^max_execution_time .*$|max_execution_time = 12000|g' /etc/php83/php.ini
 
+# update max_input_vars for large number of post elements
+RUN sed -i 's|;max_input_vars .*$|max_input_vars = 10000|g' /etc/php83/php.ini
+
+# increases post max size for big post
+RUN sed -i 's|post_max_size = .*$|post_max_size = 256M|g' /etc/php83/php.ini
+
 # change php max memory limit
 RUN sed -i 's|^memory_limit .*$|memory_limit = 512M|g' /etc/php83/php.ini
 
